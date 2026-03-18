@@ -1,5 +1,8 @@
 package com.pao.laboratory03.bonus;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Exercițiul 5 (Bonus) — Sistem de gestiune task-uri cu audit log
  *
@@ -158,6 +161,91 @@ public class Main {
         // TODO: implementează toți cei 10 pași de mai sus
         // Creează TOATE clasele necesare în acest pachet (bonus/)
         // Nu ai subpachete impuse — organizează cum consideri
+
+
+        TaskService manager = TaskService.getInstance();
+
+        System.out.println(" Adaugare task-uri ");
+        try {
+            manager.addTask("Fix login bug", Priority.CRITICAL);
+            manager.addTask("Add dark mode", Priority.LOW);
+            manager.addTask("Update docs", Priority.MEDIUM);
+            manager.addTask("Fix memory leak", Priority.HIGH);
+            manager.addTask("Refactor DB layer", Priority.HIGH);
+        } catch (Exception e) {
+            System.out.println("Eroare la adaugare: " + e.getMessage());
+        }
+
+        System.out.println();
+
+        System.out.println(" Asignare ");
+        try {
+            manager.assignTask("T001", "Ana");
+            manager.assignTask("T003", "Mihai");
+            manager.assignTask("T004", "Elena");
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println();
+
+        System.out.println(" Schimbari status ");
+        try {
+            manager.changeStatus("T001", Status.IN_PROGRESS);
+            manager.changeStatus("T001", Status.DONE);
+            manager.changeStatus("T003", Status.IN_PROGRESS);
+
+            System.out.print("T001: DONE → TODO → ");
+            manager.changeStatus("T001", Status.TODO);
+        } catch (InvalidTransitionException e) {
+            System.out.println("InvalidTransitionException: " + e.getMessage());
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println();
+
+        System.out.println(" Task-uri HIGH ");
+        List<Task> highTasks = manager.getTasksByPriority(Priority.HIGH);
+        for (Task t : highTasks) {
+            System.out.println(t);
+        }
+
+        System.out.println();
+
+
+        System.out.println(" Sumar status ");
+        Map<Status, Long> summary = manager.getStatusSummary();
+        for (Status s : Status.values()) {
+            System.out.println(s + ": " + summary.getOrDefault(s, 0L));
+        }
+
+        System.out.println();
+
+        System.out.println(" Task-uri neasignate ");
+        for (Task t : manager.getUnassignedTasks()) {
+            System.out.println(t.getId() + ": " + t.getTitle());
+        }
+
+        System.out.println();
+
+        System.out.println(" Scor urgenta (baseDays=5)");
+        System.out.println("Total: " + manager.getTotalUrgencyScore(5));
+
+        System.out.println();
+
+        manager.printAuditLog();
+
+        System.out.println();
+
+        System.out.println(" Exceptii ");
+
+        try {
+            manager.assignTask("T999", "Nimeni");
+        } catch (TaskNotFoundException e) {
+            System.out.println("TaskNotFoundException: " + e.getMessage());
+        }
+
     }
 }
 
