@@ -75,7 +75,7 @@ public class ExampleExceptions {
             System.out.println("  Sumă cerută: " + e.getAmount());
         }
 
-        // === 4. Multi-catch (prinde mai multe tipuri într-un singur catch) ===
+        // === 4. Multi-catch (prinde mai multe tipuri într-un singur catch) ==Ft=
         System.out.println("\n=== 4. Multi-catch ===");
         try {
             withdraw(500, -20);
