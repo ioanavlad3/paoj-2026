@@ -1,9 +1,17 @@
 package com.pao.laboratory06.exercise2;
 
-public abstract class Colaborator {
+import java.util.Scanner;
+
+public abstract class Colaborator implements IOperatiiCitireScriere{
     String nume;
     String prenume;
     double venitBrutLunar;
+
+    Colaborator() {
+        this.nume = "";
+        this.prenume = "";
+        this.venitBrutLunar = 0;
+    }
 
     Colaborator(String nume, String prenume, double venitBrutLunar){
         this.nume = nume;
@@ -12,4 +20,13 @@ public abstract class Colaborator {
     }
 
     public abstract double calculeazaVenitNetAnual() ;
+
+    public abstract TipColaborator getTip();
+
+    @Override
+    public abstract void afiseaza();
+
+    @Override
+    public abstract void citeste(Scanner in);
+
 }
