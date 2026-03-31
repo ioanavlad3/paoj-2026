@@ -1,4 +1,4 @@
-package com.pao.laboratory04.enums;
+package com.pao.laboratory03.enums;
 
 /**
  * Exemplu demonstrativ — Enum-uri în Java.
