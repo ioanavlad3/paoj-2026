@@ -3,6 +3,12 @@ package com.pao.laboratory06.exercise3;
 import java.util.Objects;
 
 public class Inginer extends Angajat implements PlataOnline, Comparable<Inginer> {
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+    public void setSalariu(double salary){
+        this.salariu = salary;
+    }
 
     @Override
     public void autentificare(String user, String parola) {

@@ -7,6 +7,12 @@ import java.util.Objects;
 public class PersoanaJuridica extends Persoana implements PlataOnlineSMS{
     List<String> smsTrimise = new ArrayList<>();
 
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+    public void setTelefon(String tel){
+        this.telefon = tel;
+    }
 
     @Override
     public boolean trimiteSMS(String mesaj) {
