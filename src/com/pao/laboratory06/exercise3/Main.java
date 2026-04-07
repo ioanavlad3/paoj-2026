@@ -24,7 +24,7 @@ public class Main {
         System.out.println("\nDemonstratie PlataOnline ");
         PlataOnline plataInginer = i2;
         plataInginer.autentificare("Ionescu", "parola123");
-        System.out.println("Sold prin interfața: " + plataInginer.consultareSold());
+        System.out.println("Sold prin interfata: " + plataInginer.consultareSold());
 
         // PersoanaJuridica prin PlataOnlineSMS
         System.out.println("\n Demonstrație PersoanaJuridica & SMS ");
@@ -35,7 +35,7 @@ public class Main {
         PlataOnlineSMS plataSMS = firma;
         plataSMS.trimiteSMS("Factura curenta: 500 RON");
 
-        System.out.println("Mesaje stocate în obiect: " + firma.smsTrimise);
+        System.out.println("Mesaje stocate in obiect: " + firma.smsTrimise);
 
         //  Afisare constanta Enum
         System.out.println("\n Constante Financiare ");

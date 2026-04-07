@@ -29,7 +29,7 @@ public class Main {
             };
             colaboratori.add(c);
         }
-        // Sortează și afișează pe tip, fiecare descrescător după venit net anual
+        // Sorteaza si afiseaza pe tip, fiecare descrescator dupa venit net anual
         for (TipColaborator tipColab : TipColaborator.values()) {
             colaboratori.stream()
                     .filter(c -> c.getTip() == tipColab)
@@ -46,7 +46,7 @@ public class Main {
                 .filter(c -> c instanceof PersoanaJuridica)
                 .sorted((a, b) -> Double.compare(b.calculeazaVenitNetAnual(), a.calculeazaVenitNetAnual()))
                 .forEach(Colaborator::afiseaza);
-        // Sume și număr colaboratori pe tip
+        // Sume si numar colaboratori pe tip
         System.out.println("\nSume și număr colaboratori pe tip:");
         Map<TipColaborator, Double> suma = new EnumMap<>(TipColaborator.class);
         Map<TipColaborator, Integer> numar = new EnumMap<>(TipColaborator.class);
