@@ -1,3 +1,5 @@
+package com.pao.laboratory07.exercise3;
+
 import com.pao.laboratory07.exercise3.Comanda;
 import com.pao.laboratory07.exercise3.ComandaRedusa;
 import com.pao.laboratory07.exercise3.ComandaGratuita;
@@ -35,7 +37,7 @@ public class Main {
 
                 case "FILTER":
                     double minPrice = Double.parseDouble(tokens[1]);
-                    System.out.println("\n---------FILTERED (Price > " + minPrice + ")--------");
+                    System.out.println("\n---FILTERED (Price > " + minPrice + ")---");
                     comenzi.stream()
                             .filter(c -> c.pretFinal() > minPrice)
                             .forEach(c -> System.out.println(c.descriere()));
@@ -51,7 +53,8 @@ public class Main {
                 case "SPECIAL":
                     System.out.println("\n---- SPECIAL (Discount > 15%) ---");
                     comenzi.stream()
-                            .filter(c -> c instanceof ComandaRedusa && ((ComandaRedusa) c).getDiscount() > 15)
+                            .filter(c -> c instanceof ComandaRedusa && ((ComandaRedusa) c)
+                                    .getDiscount() > 15)
                             .forEach(c -> System.out.println(c.descriere()));
                     break;
 
@@ -73,7 +76,7 @@ public class Main {
     }
 
     private static void printStats(List<Comanda> comenzi) {
-        System.out.println("\n---------STATS--------");
+        System.out.println("\n---STATS---");
         double medieS = comenzi.stream().filter(c -> c instanceof ComandaStandard)
                 .mapToDouble(Comanda::pretFinal).average().orElse(0);
         double medieD = comenzi.stream().filter(c -> c instanceof ComandaRedusa)
