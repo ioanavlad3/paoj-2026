@@ -8,9 +8,6 @@ public class Main {
     private static final String FILE_PATH = "src/com/pao/laboratory08/tests/studenti.txt";
 
     public static void main(String[] args) throws Exception {
-        // TODO: Implementează conform Readme.md
-        //
-        // 1. Citește studenții din FILE_PATH cu BufferedReader
 
         ArrayList<Student> studenti = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
