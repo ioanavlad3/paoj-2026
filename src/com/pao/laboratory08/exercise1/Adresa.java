@@ -24,6 +24,7 @@ public class Adresa implements Cloneable {
         this.strada = strada;
     }
 
+    @Override
     public String toString() {
         return "Adresa{oras='" + oras + "', strada='" + strada + "'}";
     }

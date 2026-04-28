@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    // Calea către fișierul cu date — relativă la rădăcina proiectului
     private static final String FILE_PATH = "src/com/pao/laboratory08/tests/studenti.txt";
 
     public static void main(String[] args) throws Exception {
@@ -28,7 +27,7 @@ public class Main {
                 Student student = new Student(nume, varsta, adresa);
                 studenti.add(student);
             } else {
-                System.err.println("Linie incompletă: " + linie);
+                System.err.println("Linie incompleta: " + linie);
             }
         }
         br.close();

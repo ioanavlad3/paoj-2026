@@ -33,7 +33,7 @@ public class Main {
                 Student student = new Student(nume, varsta, adresa);
                 studenti.add(student);
             } else {
-                System.err.println("Linie incompletă: " + linie);
+                System.err.println("Linie incompleta: " + linie);
             }
         }
         br.close();
