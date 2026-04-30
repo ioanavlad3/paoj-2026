@@ -12,8 +12,13 @@ public class Main {
         // 1. Citește N din stdin, apoi cele N tranzacții (id suma data contSursa contDestinatie tip)
         // 2. Setează câmpul note = "procesat" pe fiecare tranzacție înainte de serializare
 
+        File director = new File("output");
+        if (!director.exists()) {
+            director.mkdirs(); // Creează folderul dacă nu există
+        }
+
         Scanner scanner = new Scanner(System.in);
-        String OUTPUT_FILE = "output.txt";
+        //File folder = new File("output.txt");
 
         int n = scanner.nextInt();
         List<Tranzactie> tranzactii = new ArrayList<>();
@@ -29,47 +34,66 @@ public class Main {
             t.setNote("procesat");
             tranzactii.add(t);
         }
-
-        // 3. Serializează lista de tranzacții în OUTPUT_FILE cu ObjectOutputStream (try-with-resources)
-
+        
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(OUTPUT_FILE))){
             oos.writeObject(tranzactii);
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
-        // 4. Deserializează lista din OUTPUT_FILE cu ObjectInputStream (try-with-resources)
+        List<Tranzactie> transactiiDeserialized = null;
 
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(OUTPUT_FILE))){
-            List<Tranzactie> tranzactiiDeserialized = (List<Tranzactie>) ois.readObject();
+            transactiiDeserialized = (List<Tranzactie>) ois.readObject();
 
-            // Verificare: afișează tranzacțiile deserializate
-            for(Tranzactie t : tranzactiiDeserialized){
-                System.out.println(t);
-            }
+        } catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
         }
 
-
-        // 5. Procesează comenzile din stdin până la EOF:
-        //    - LIST          → afișează toate tranzacțiile, câte una pe linie
-        //    - FILTER yyyy-MM → afișează tranzacțiile cu data care începe cu yyyy-MM
-        //                       sau "Niciun rezultat." dacă nu există
-        //    - NOTE id        → afișează "NOTE[id]: <valoarea câmpului note>"
-        //                       sau "NOTE[id]: not found" dacă id-ul nu există
-        //
-        // Format linie tranzacție:
-        //   [id] data tip: suma RON | contSursa -> contDestinatie
-        //   Ex: [1] 2024-01-15 CREDIT: 1500.00 RON | RO01SRC1 -> RO01DST1
-
-        boolean citire = true;
-
-        while(citire){
+        while(scanner.hasNext()){
             String cerinta = scanner.next();
+
             switch (cerinta){
                 case "LIST": {
                     for(int i = 0; i < n; i ++){
-                        System.out.println(tranzactii.get(i).toString());
+                        System.out.println(transactiiDeserialized.get(i).toString());
                     }
                     break;
                 }
+
+                case "FILTER": {
+                    String prefix = scanner.next();
+                    boolean gasit = false;
+                    assert transactiiDeserialized != null;
+                    for(Tranzactie t : transactiiDeserialized){
+                        if (t.getData().startsWith(prefix) ){
+                            gasit = true;
+                            System.out.println(t.toString());
+                        }
+                    }
+                    if(!gasit){
+                        System.out.println("Niciun rezultat.");
+                    }
+                    break;
+                }
+
+                case "NOTE" : {
+                    int id = scanner.nextInt();
+                    boolean gasit = false;
+                    assert transactiiDeserialized != null;
+                    for (Tranzactie t : transactiiDeserialized){
+                        if (t.getId() == id) {
+                            System.out.println("NOTE[" + id + "]: " + t.getNote());
+                            gasit = true;
+                            break;
+                        }
+                    }
+                    if (!gasit){
+                        System.out.println("NOTE[" + id + "]: " + "not found");
+                    }
+                    break;
+                }
+
                 default:
                     System.out.println("cerinta gresita");
 

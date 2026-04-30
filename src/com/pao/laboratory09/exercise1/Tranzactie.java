@@ -1,6 +1,8 @@
 package com.pao.laboratory09.exercise1;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class Tranzactie implements Serializable {
@@ -26,11 +28,22 @@ public class Tranzactie implements Serializable {
 
     public void setNote(String note) { this.note = note; }
 
+    public String getData(){
+        return this.data;
+    }
+
+    public String getNote(){
+        return this.note;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
     @Override
     public String toString() {
-        return "Tranzactie{" + "id=" + id + ", suma=" + suma + ", data='" + data + '\'' +
-                ", contSursa='" + contSursa + '\'' + ", contDestinatie='" + contDestinatie + '\'' +
-                ", tip=" + tip + ", note='" + note + '\'' + '}';
+        return String.format("[%d] %s %s: %.2f RON | %s -> %s",
+                id, data, tip, suma, contSursa, contDestinatie);
     }
 
 }
