@@ -34,7 +34,7 @@ public class Main {
             t.setNote("procesat");
             tranzactii.add(t);
         }
-        
+
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(OUTPUT_FILE))){
             oos.writeObject(tranzactii);
         } catch (IOException e){

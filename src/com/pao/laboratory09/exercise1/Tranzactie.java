@@ -40,6 +40,11 @@ public class Tranzactie implements Serializable {
         return this.id;
     }
 
+    public double getSuma() { return this.suma; }
+
+    public TipTranzactie getTip() {return this.tip; }
+
+
     @Override
     public String toString() {
         return String.format("[%d] %s %s: %.2f RON | %s -> %s",
