@@ -1,5 +1,6 @@
 package com.pao.laboratory10.exercise1;
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Main {
@@ -25,6 +26,96 @@ public class Main {
         // Format linie tranzacție: [id] data tip: suma RON
         //   Ex: [1] 2024-01-10 CREDIT: 500.00 RON
 
-        System.out.println("TODO: implementează exercițiul 1");
+        LinkedList<Tranzactie> tranzactii = new LinkedList<>();
+
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            String cerinta = scanner.next();
+            switch (cerinta) {
+                case "ENQUEUE" -> {
+                    int id = scanner.nextInt();
+                    double suma = scanner.nextDouble();
+                    String data = scanner.next();
+                    TipTranzactie tip = TipTranzactie.valueOf(scanner.next());
+
+                    Tranzactie tranzactie = new Tranzactie(id, suma, data, tip);
+                    tranzactii.addLast(tranzactie);
+
+                    break;
+                }
+                case "DEQUEUE" -> {
+                    if (tranzactii.size() == 0){
+                        System.out.println("Coada goala.");
+                    } else {
+                        Tranzactie tranzactie = tranzactii.removeFirst();
+                        System.out.println("Procesat: " + tranzactie);
+                    }
+                    break;
+                }
+                case "PUSH" -> {
+                    int id = scanner.nextInt();
+                    double suma = scanner.nextDouble();
+                    String data = scanner.next();
+                    TipTranzactie tip = TipTranzactie.valueOf(scanner.next());
+
+                    Tranzactie tranzactie = new Tranzactie(id, suma, data, tip);
+                    tranzactii.addFirst(tranzactie);
+
+                    break;
+                }
+
+                case "POP" -> {
+                    if (tranzactii.size() == 0){
+                        System.out.println("Coada goala.");
+                    } else {
+                        Tranzactie tranzactie = tranzactii.removeFirst();
+                        System.out.println("Extras: " + tranzactie);
+                    }
+                    break;
+                }
+
+                case "PRINT" -> {
+                    for (Tranzactie t : tranzactii) {
+                        System.out.println(t.toString());
+                    }
+                    break;
+                }
+
+                case "SIZE" -> {
+                    System.out.println("Dimensiune coada: " + tranzactii.size());
+                    break;
+                }
+
+                case "REMOVE_DEBIT" -> {
+                    int count = 0;
+                    Iterator<Tranzactie> iterator = tranzactii.iterator();
+                    while (iterator.hasNext()){
+                        Tranzactie t = iterator.next();
+                        if (t.getTip() == TipTranzactie.DEBIT) {
+                            count ++;
+                            iterator.remove();
+                        }
+                    }
+                    System.out.println("Eliminat " + count + " tranzactii DEBIT.");
+                    break;
+                }
+
+                case "REMOVE_BELOW" -> {
+                    double threshold = scanner.nextDouble();
+                    int count = 0;
+                    Iterator<Tranzactie> iterator = tranzactii.iterator();
+                    while (iterator.hasNext()){
+                        Tranzactie t = iterator.next();
+                        if (t.getSuma() < threshold) {
+                            count ++;
+                            iterator.remove();
+                        }
+                    }
+                    System.out.println(String.format("Eliminat %d tranzactii sub %.2f RON.", count, threshold));
+                    break;
+                }
+            }
+        }
+
     }
 }
