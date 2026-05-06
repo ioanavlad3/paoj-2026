@@ -14,7 +14,7 @@ public class Main {
 
         File director = new File("output");
         if (!director.exists()) {
-            director.mkdirs(); // Creează folderul dacă nu există
+            director.mkdirs();
         }
 
         Scanner scanner = new Scanner(System.in);
