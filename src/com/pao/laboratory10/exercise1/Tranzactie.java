@@ -19,6 +19,9 @@ public class Tranzactie {
         return this.suma ;
     }
 
+    public int getId() { return this.id; }
+
+    public String getData() {return this.data;}
 
     @Override
     public String toString(){
