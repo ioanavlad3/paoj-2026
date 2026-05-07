@@ -30,5 +30,4 @@ public class Tranzactie {
         return String.format("[%d] %s %s: %.2f RON", this.id, this.data, this.tip, this.suma);
     }
 
-
 }
