@@ -23,6 +23,7 @@ public class Tranzactie {
 
     public String getData() {return this.data;}
 
+
     @Override
     public String toString(){
         //return "[" + this.id + "] " + this.data + " " + this.tip + ": " + this.suma + " RON";
